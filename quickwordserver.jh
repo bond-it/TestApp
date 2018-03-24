@@ -1,0 +1,44 @@
+entity User {
+	id String,
+    creationTime Instant
+}
+
+entity WordList {
+	name String,
+	languageFrom Language,
+    languageTo Language
+}
+
+entity Word {
+	language Language,
+	value String,
+}
+
+enum Language {
+    ENGLISH, POLISH, RUSSIAN, UKRAINIAN
+}
+
+relationship ManyToMany {
+	Word{task(title)} to Word{job},
+    Word{task(title)} to WordList{job}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	User{wordList} to WordList
+}
+
+//relationship ManyToOne {
+	//Employee{manager} to Employee
+//}
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl //except Employee, Job
+// Set an angular suffix
+angularSuffix * with mySuffix
